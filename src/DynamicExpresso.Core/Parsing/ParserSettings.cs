@@ -10,9 +10,11 @@ namespace DynamicExpresso.Parsing
 		private readonly Dictionary<string, ReferenceType> _knownTypes;
 		private readonly HashSet<MethodInfo> _extensionMethods;
 
-		public ParserSettings(bool caseInsensitive)
+		public ParserSettings(bool caseInsensitive, bool allowSingleQuotedStrings )
 		{
 			CaseInsensitive = caseInsensitive;
+
+			AllowSingleQuotedStrings = allowSingleQuotedStrings;
 
 			KeyComparer = CaseInsensitive ? StringComparer.InvariantCultureIgnoreCase : StringComparer.InvariantCulture;
 
@@ -48,6 +50,11 @@ namespace DynamicExpresso.Parsing
 			private set;
 		}
 
+		public bool AllowSingleQuotedStrings
+		{
+			get;
+			private set;
+		}
 		public StringComparison KeyComparison
 		{
 			get;

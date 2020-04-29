@@ -34,8 +34,9 @@ namespace DynamicExpresso
 		public Interpreter(InterpreterOptions options)
 		{
 			var caseInsensitive = options.HasFlag(InterpreterOptions.CaseInsensitive);
+			var allowSingleQuotedStrings = options.HasFlag( InterpreterOptions.AllowSingleQuotedStrings );
 
-			_settings = new ParserSettings(caseInsensitive);
+			_settings = new ParserSettings(caseInsensitive, allowSingleQuotedStrings);
 
 			if ((options & InterpreterOptions.SystemKeywords) == InterpreterOptions.SystemKeywords)
 			{

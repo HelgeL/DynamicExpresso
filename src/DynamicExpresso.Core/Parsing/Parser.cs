@@ -166,7 +166,7 @@ namespace DynamicExpresso.Parsing
 		private Expression ParseLogicalOr()
 		{
 			var left = ParseLogicalXor();
-			while (_token.id == TokenId.Bar)
+			while (_token.id == TokenId.Bar || ( _token.id == TokenId.Identifier && _token.text.Equals(ParserConstants.KeywordOr, _arguments.Settings.KeyComparison ) ) )
 			{
 				NextToken();
 				var right = ParseLogicalXor();
@@ -194,7 +194,8 @@ namespace DynamicExpresso.Parsing
 		private Expression ParseLogicalAnd()
 		{
 			var left = ParseComparison();
-			while (_token.id == TokenId.Amphersand)
+
+			while (_token.id == TokenId.Amphersand || (_token.id == TokenId.Identifier && _token.text.Equals( ParserConstants.KeywordAnd, _arguments.Settings.KeyComparison ) ) )
 			{
 				NextToken();
 				var right = ParseComparison();
@@ -494,8 +495,14 @@ namespace DynamicExpresso.Parsing
 
 			s = EvalEscapeStringLiteral(s);
 
-			if (s.Length != 1)
-				throw CreateParseException(_token.pos, ErrorMessages.InvalidCharacterLiteral);
+			if( s.Length != 1 ) {
+				if( _arguments.Settings.AllowSingleQuotedStrings ) {
+					_token.id = TokenId.StringLiteral;
+					return ParseStringLiteral();
+				} else {
+
+				}
+			}
 
 			NextToken();
 			return CreateLiteral(s[0]);

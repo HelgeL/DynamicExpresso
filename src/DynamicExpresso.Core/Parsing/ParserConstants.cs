@@ -10,12 +10,16 @@ namespace DynamicExpresso.Parsing
 		public const string KeywordIs = "is";
 		public const string KeywordNew = "new";
 		public const string KeywordTypeof = "typeof";
+		public const string KeywordAnd = "and";
+		public const string KeywordOr = "or";
 
 		public static readonly string[] ReservedKeywords = {
 				KeywordAs,
 				KeywordIs,
 				KeywordNew,
-				KeywordTypeof
+				KeywordTypeof,
+				KeywordAnd,
+				KeywordOr
 			};
 	}
 }

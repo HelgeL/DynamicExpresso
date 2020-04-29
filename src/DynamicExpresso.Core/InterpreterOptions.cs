@@ -23,6 +23,10 @@ namespace DynamicExpresso
 		/// </summary>
 		CaseInsensitive = 8,
 		/// <summary>
+		/// Allow 'single quoted' strings
+		/// </summary>
+		AllowSingleQuotedStrings = 16,
+		/// <summary>
 		/// Load all default configurations: PrimitiveTypes + SystemKeywords + CommonTypes
 		/// </summary>
 		Default = PrimitiveTypes | SystemKeywords | CommonTypes,
